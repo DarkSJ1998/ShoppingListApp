@@ -28,6 +28,7 @@ class ListItem extends Component {
         },
         listItemText: {}
     });
+    
 }
 
 export default ListItem;

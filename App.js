@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import { View, StyleSheet, FlatList} from 'react-native';
+import { View, StyleSheet, FlatList, Alert } from 'react-native';
 import { v4 as uuid } from 'uuid';
 
 import Header from './components/Header';
@@ -32,7 +32,7 @@ class App extends Component {
 		return (
 			<View style={this.styles.container}>
 				<Header title='Shopping List' />
-				<AddItemComponent addItem={this.addItem}/>
+				<AddItemComponent addItem={this.addItem} />
 				<FlatList
 					data={this.state.items}
 					renderItem={({ item }) => <ListItem item={item} deleteItem={this.deleteItem} />}
@@ -42,16 +42,22 @@ class App extends Component {
 	}
 
 	addItem = (value) => {
-		this.setState({
-			items: [
-				...this.state.items,
-				{
-					id: uuid(),
-					text: value
-				}
-			],
-			newItemText: ''
-		});
+		if (!value) {
+			Alert.alert('Nothing Entered 😕', 'Please enter an item to add', [{ text: 'ok' }]);
+			
+		} else {
+			this.setState({
+				items: [
+					...this.state.items,
+					{
+						id: uuid(),
+						text: value
+					}
+				],
+				newItemText: ''
+			});
+		}
+
 	}
 
 	deleteItem = (id) => {
@@ -64,7 +70,7 @@ class App extends Component {
 			flex: 1
 		}
 	});
-	
+
 }
 
 export default App;

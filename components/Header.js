@@ -23,6 +23,7 @@ class Header extends Component {
             textAlign: 'center'
         }
     });
+
 }
 
 export default Header;
